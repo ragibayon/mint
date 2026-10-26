@@ -1,0 +1,3 @@
+# Preserve archived evidence, including embedded newlines and code whitespace.
+*.csv -text -whitespace
+*.jsonl -text

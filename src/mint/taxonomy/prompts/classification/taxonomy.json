@@ -1,0 +1,476 @@
+{
+  "taxonomy_id": "mint_contract_type",
+  "version": "mint_final",
+  "title": "API contract types (EMSE 2023 seed)",
+  "frozen": true,
+  "source": {
+    "paper": "What kinds of contracts do ML APIs need?",
+    "doi": "10.1007/s10664-023-10320-z",
+    "anchor": "Table 3 and Sections 2.3.1-2.3.3"
+  },
+  "nodes": [
+    {
+      "id": "SAM",
+      "name": "Single API Method",
+      "source_label": "Single API Method (SAM)",
+      "parent_id": null,
+      "definition": "A behavioral precondition or postcondition involving a single API method.",
+      "inclusion_criteria": [
+        "The obligation constrains one API method."
+      ],
+      "exclusion_criteria": [
+        "Pure method-call ordering.",
+        "A behavior/order dependency or selection."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.DT",
+      "name": "Data Type",
+      "source_label": "Data Type (DT)",
+      "parent_id": "SAM",
+      "definition": "A type constraint on an API argument.",
+      "inclusion_criteria": [
+        "An argument must have an accepted type."
+      ],
+      "exclusion_criteria": [
+        "Value-only constraints."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.DT.PT",
+      "name": "Primitive Type",
+      "source_label": "Primitive Type (PT)",
+      "parent_id": "SAM.DT",
+      "definition": "A single API method constrains an argument to a primitive type.",
+      "inclusion_criteria": [
+        "Primitive types such as string, integer, float, boolean, number, or None."
+      ],
+      "exclusion_criteria": [
+        "Built-in compound, reference, or ML-specific types."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.DT.BIT",
+      "name": "Built-in Type",
+      "source_label": "Built-in Type (BIT)",
+      "parent_id": "SAM.DT",
+      "definition": "A single API method requires a built-in compound type.",
+      "inclusion_criteria": [
+        "List, dictionary, tuple, or ordinary array constraints."
+      ],
+      "exclusion_criteria": [
+        "Primitive, referenced object/function/class, or ML tensor dtype constraints."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.DT.RT",
+      "name": "Reference Type",
+      "source_label": "Reference Type (RT)",
+      "parent_id": "SAM.DT",
+      "definition": "An argument requires a referenced object, function, or class-typed value.",
+      "inclusion_criteria": [
+        "Internal or external class objects, instances, or callable functions."
+      ],
+      "exclusion_criteria": [
+        "Primitive, built-in compound, or ML tensor dtype constraints."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.DT.MT",
+      "name": "ML Type",
+      "source_label": "ML Type (MT)",
+      "parent_id": "SAM.DT",
+      "definition": "An argument requires an ML-domain tensor or multidimensional-array type or dtype.",
+      "inclusion_criteria": [
+        "Tensor types or ML-specific uniform dtypes such as float32 or complex64."
+      ],
+      "exclusion_criteria": [
+        "Framework objects merely associated with LLM or ML systems."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.BET",
+      "name": "Boolean Expression Type",
+      "source_label": "Boolean Expression Type (BET)",
+      "parent_id": "SAM",
+      "definition": "A logical or value assertion involving API arguments.",
+      "inclusion_criteria": [
+        "Comparisons or logical combinations constrain argument values."
+      ],
+      "exclusion_criteria": [
+        "Type-only constraints and method order."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.BET.IC1",
+      "name": "Intra-argument Contract",
+      "source_label": "Intra-argument Contract (IC-1)",
+      "parent_id": "SAM.BET",
+      "definition": "A logical or value constraint on one argument of one API method.",
+      "inclusion_criteria": [
+        "One argument must satisfy a value, range, format, or logical constraint."
+      ],
+      "exclusion_criteria": [
+        "Relationships across two or more arguments or across distinct methods/components."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "SAM.BET.IC2",
+      "name": "Inter-argument Contract",
+      "source_label": "Inter-argument Contract (IC-2)",
+      "parent_id": "SAM.BET",
+      "definition": "A relationship across two or more arguments of the same API method.",
+      "inclusion_criteria": [
+        "Arguments of one call must match or jointly satisfy a relation."
+      ],
+      "exclusion_criteria": [
+        "Dependencies between components or different API methods."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "AMO",
+      "name": "API Method Order",
+      "source_label": "API Method Order (AMO)",
+      "parent_id": null,
+      "definition": "A temporal constraint involving multiple API calls.",
+      "inclusion_criteria": [
+        "The obligation requires a genuine method-call ordering."
+      ],
+      "exclusion_criteria": [
+        "Future-tense wording without a temporal call-order constraint."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "AMO.G",
+      "name": "Always",
+      "source_label": "Always (G)",
+      "parent_id": "AMO",
+      "definition": "An always-required temporal API ordering or obligation in its applicable execution context.",
+      "inclusion_criteria": [
+        "A required order must hold whenever the execution context applies."
+      ],
+      "exclusion_criteria": [
+        "An obligation that only needs to occur at some later execution point."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "AMO.F",
+      "name": "Eventually",
+      "source_label": "Eventually (F)",
+      "parent_id": "AMO",
+      "definition": "A method call or ordering obligation must occur at a subsequent point in execution.",
+      "inclusion_criteria": [
+        "After a triggering state or call, another call must occur eventually."
+      ],
+      "exclusion_criteria": [
+        "Always-required adjacency/order and non-temporal conditions."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H",
+      "name": "Hybrid",
+      "source_label": "Hybrid (H)",
+      "parent_id": null,
+      "definition": "A blend of behavioral and temporal contracts or a selection among contract forms.",
+      "inclusion_criteria": [
+        "Behavior and call order depend on each other, or explicit alternatives satisfy an obligation."
+      ],
+      "exclusion_criteria": [
+        "A single behavioral or temporal obligation without dependency or alternatives."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H.SAI",
+      "name": "SAM-AMO Interdependency",
+      "source_label": "SAM-AMO Interdependency (SAI): SAM (Level 3) ∧ AMO (Level 2)",
+      "parent_id": "H",
+      "definition": "A behavior, argument, or state condition and API-call order constrain each other.",
+      "inclusion_criteria": [
+        "State or argument conditions determine call order, or call order requires a condition."
+      ],
+      "exclusion_criteria": [
+        "Independent co-occurrence of behavioral and temporal concepts."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H.SL",
+      "name": "Selection",
+      "source_label": "Selection (SL)",
+      "parent_id": "H",
+      "definition": "A choice among alternative ways to satisfy one API contract.",
+      "inclusion_criteria": [
+        "The contract states explicit acceptable alternatives."
+      ],
+      "exclusion_criteria": [
+        "A conjunction of requirements without choice."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H.SL.SAM",
+      "name": "Selection - SAM alternatives",
+      "source_label": "SAM (Level 3)",
+      "parent_id": "H.SL",
+      "definition": "Multiple acceptable behavioral or SAM ways can satisfy the obligation.",
+      "inclusion_criteria": [
+        "All explicit alternatives are SAM-level behavioral forms."
+      ],
+      "exclusion_criteria": [
+        "Temporal alternatives or mixed behavioral/temporal alternatives."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H.SL.AMO",
+      "name": "Selection - AMO alternatives",
+      "source_label": "AMO (Level 2)",
+      "parent_id": "H.SL",
+      "definition": "Multiple acceptable temporal or API-order ways can satisfy the obligation.",
+      "inclusion_criteria": [
+        "All explicit alternatives are AMO-level forms."
+      ],
+      "exclusion_criteria": [
+        "Behavioral alternatives or mixed behavioral/temporal alternatives."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "H.SL.MIXED",
+      "name": "Selection - SAM and AMO alternatives",
+      "source_label": "Combination of SAM (Level 3) and AMO (Level 2)",
+      "parent_id": "H.SL",
+      "definition": "Behavioral and temporal/order forms are alternatives for satisfying one obligation.",
+      "inclusion_criteria": [
+        "At least one SAM alternative and one AMO alternative are explicit choices."
+      ],
+      "exclusion_criteria": [
+        "A behavior/order dependency or alternatives within only one family."
+      ],
+      "taxonomy_origin": "emse_2023",
+      "citations": [],
+      "immutable": true,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.SAM.RV",
+      "name": "Return Value Contract",
+      "source_label": "Return Value Contract",
+      "parent_id": "SAM",
+      "definition": "A postcondition of a single API method on the value it returns. It covers the returned value's type, structure, field location, access form (attribute versus subscript, element versus array), or content guarantees, and the caller's obligation to consume the result in that form.",
+      "inclusion_criteria": [
+        "The obligation constrains the type, shape, nesting, field path, or access form of what one API method returns, yields, or streams back.",
+        "The obligation states an argument-independent guarantee or non-guarantee about returned content, for example that streamed text may not be valid JSON, that ids are always returned, or that chunks are valid HTML."
+      ],
+      "exclusion_criteria": [
+        "The obligation constrains an argument's type, which belongs to SAM.DT.*, or an argument's value, which belongs to SAM.BET.*. This includes a callable argument whose own return type is constrained, as in 78503492_n0, which stays SAM.DT.",
+        "A returned content difference that holds only for a specific argument value or argument absence stays SAM.BET.IC1 or SAM.BET.IC2, as in 76482987_n1.",
+        "Side effects or internal processing that are not part of the returned value, such as what gets embedded, billing, or whether a function is executed.",
+        "Data produced by a caller-side component, such as a backend's JSON consumed by a frontend.",
+        "Version-conditional choice of a different method; see AES."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.SAM.PS",
+      "name": "Parameter Signature Contract",
+      "source_label": "Parameter Signature Contract",
+      "parent_id": "SAM",
+      "definition": "A precondition of a single API method on its parameter interface. It covers which parameter names or keys are recognized or allowed, the permitted set of request parameters or properties, the number of positional arguments, and the passing mode (positional versus keyword). It applies independently of the type or value of any argument.",
+      "inclusion_criteria": [
+        "A parameter must be supplied under a specific name or key rather than another, for example model rather than engine, or modelName rather than model.",
+        "Only a listed set of parameters or properties may be passed, and unrecognized ones are rejected.",
+        "Arity or passing-mode requirements, such as no extra positional arguments or an argument that must be passed by keyword.",
+        "A user-supplied override must accept the parameters the framework passes to it."
+      ],
+      "exclusion_criteria": [
+        "Constraints on an argument's type (SAM.DT.*) or value or format (SAM.BET.IC1).",
+        "Relations between the values of two arguments (SAM.BET.IC2).",
+        "Choosing a different method, factory, or class (AES).",
+        "Field names of returned objects (SAM.RV)."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.AES",
+      "name": "API Element Selection",
+      "source_label": "API Element Selection",
+      "parent_id": null,
+      "definition": "An obligation that identifies which API element must, or must not, be invoked, instantiated, imported, or targeted to accomplish a task. The element may be a method, class, constructor or factory, endpoint, exported symbol, or module path. The choice may be conditioned on usage context such as the model kind, sync versus async usage, or the library version in use.",
+      "inclusion_criteria": [
+        "The obligation has the form 'use or call element X (rather than Y)' or 'element Y does not exist or must not be used', where X and Y are distinct API methods, classes, endpoints, or symbols.",
+        "The obligation prescribes the import location or exact symbol name or casing by which an API element must be referenced.",
+        "The element choice is conditioned on the kind of model or usage context, for example chat versus completion models or async consumption, with no constraint stated on an argument of a single call."
+      ],
+      "exclusion_criteria": [
+        "Explicit sets of equally acceptable alternatives satisfying one obligation (H.SL.*).",
+        "A constraint that an argument of a call must be an instance of a given class (SAM.DT.RT), as in 77962777_n0.",
+        "Required ordering between calls, such as instantiating a client before calling it (AMO.G), unless the substance is only which element to use.",
+        "Requirements on installed package versions, runtimes, or external service state that do not name the API element to use (EP).",
+        "Parameter name choices within one method (SAM.PS)."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.EP",
+      "name": "Environment Precondition",
+      "source_label": "Environment Precondition",
+      "parent_id": null,
+      "definition": "A precondition for an API call, construction, or import to succeed that constrains the execution environment rather than the call. The environment includes installed packages and their versions or compatible pairs, the runtime or language version, the execution platform (server versus browser, edge versus Node, OS), project files or name shadowing, and build or deployment configuration. It also includes the state of external services and accounts: deployed model, region, or tier, server plugins and schema, credentials scope, quota, billing, and rate limits.",
+      "inclusion_criteria": [
+        "The obligation is satisfied or violated by environment, configuration, or external-service state, independently of the arguments passed and the order of API calls.",
+        "The obligation concerns package installation, version pinning, version compatibility, runtime version, a platform restriction, file naming or layout, environment variables or config files, server setup, account permission, quota or billing, or a hosted-model capability."
+      ],
+      "exclusion_criteria": [
+        "The obligation names which API element to use, even if version-motivated (AES).",
+        "Constraints on argument types or values, even when the value comes from configuration such as an API key argument format (SAM.*).",
+        "A genuine ordering between API calls, such as a server-start call before invocation in 79275429_n0 (AMO.G).",
+        "Descriptions of library behavior or output (SAM.RV, or outside scope)."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.SAM.SE",
+      "name": "State and Side-Effect Postcondition",
+      "source_label": "State and Side-Effect Postcondition",
+      "parent_id": "SAM",
+      "definition": "A postcondition of a single API method on an effect the caller can observe other than the returned value. The effect may be persisted or in-memory state the method creates, modifies, preserves, or deletes; files or log records it writes and their location or content; callbacks or notifications it emits; or owned resources it acquires or releases.",
+      "inclusion_criteria": [
+        "After one method call, a caller-observable state or effect must, or must not, hold. Examples: a table no longer exists after delete_collection, an existing config file is not overwritten, one log file is written per agent, a CSV is written without a header row, Dispose releases the owned connection, or a callback is notified exactly once with the result.",
+        "The effect holds unconditionally or depends only on the receiver's or environment's current state (for example, a node limit already reached). It does not depend on the value of a specific argument."
+      ],
+      "exclusion_criteria": [
+        "Constraints on what the method returns, yields, or streams (MINT.SAM.RV).",
+        "An effect that occurs only for a specific argument value or argument absence stays SAM.BET.IC1 or SAM.BET.IC2, as in sarahelshark vectorize_and_store_chat_history with an empty chat_history.",
+        "A required ordering between two or more API calls, such as flushing a file before executing it (AMO.G), or a state condition that determines call order (H.SAI).",
+        "Internal implementation steps the caller cannot observe through the API, such as lookup-key construction, path composition inside a method, local variable initialization, or loop placement. These remain out of scope.",
+        "Installed packages, platform, or external-service preconditions (MINT.EP)."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.XCD",
+      "name": "Cross-Call Value Dependency",
+      "source_label": "Cross-Call Value Dependency",
+      "parent_id": null,
+      "definition": "An obligation that a value supplied to one API call must be identical to, derived from, or explicitly forwarded from a value supplied to or produced by a different API call or pipeline stage. The substance of the obligation is which value flows between the calls, not the order in which the calls occur.",
+      "inclusion_criteria": [
+        "An argument of call B must be the same value as, or must carry, an argument passed to call A, for example a cancellation token received by one method that must be forwarded to every downstream call, or one computed expiry used both for a delegation key and for a SAS generation call.",
+        "An input needed by a later stage of a composed call chain must be explicitly passed along with the earlier stage's output, because the earlier stage does not retain it."
+      ],
+      "exclusion_criteria": [
+        "Relations among two or more arguments of the same single call (SAM.BET.IC2).",
+        "A required temporal ordering between calls with no constraint on the values passed (AMO.G or AMO.F).",
+        "A state or argument condition that determines call order, or a call order that requires a condition (H.SAI).",
+        "The type, shape, or access form of what one method returns (MINT.SAM.RV).",
+        "Value wiring entirely inside one function body that the API caller cannot observe, such as which local variable fills a payload field (out of scope)."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    },
+    {
+      "id": "MINT.SIC",
+      "name": "Subclass Implementation Contract",
+      "source_label": "Subclass Implementation Contract",
+      "parent_id": null,
+      "definition": "An obligation on how a caller-defined subclass or implementation of an API-provided base class or interface must be declared so that the API accepts or can instantiate it. It covers abstract members that must be implemented, the required decorator or kind of a member (for example classmethod), and the required declaration form of state (for example class-level annotated fields rather than attributes assigned in __init__).",
+      "inclusion_criteria": [
+        "A subclass of an API base class must implement a named abstract member before it can be instantiated.",
+        "A subclass of an API base class must declare its attributes in a form the base class mechanism requires, such as annotated pydantic fields, rather than another form."
+      ],
+      "exclusion_criteria": [
+        "The parameters a user-supplied override must accept (MINT.SAM.PS).",
+        "A requirement that an argument be an instance of a class or subclass (SAM.DT.RT), such as passing a BaseCallbackHandler subclass instance in 76284412_n0.",
+        "Which base class, factory, or element to use (MINT.AES).",
+        "Internal logic inside an override body that the API does not require, such as exception handling choices in a repository's own handler.",
+        "Library-side visibility or declaration changes requested of the API provider itself, such as making configuration properties public."
+      ],
+      "taxonomy_origin": "mint_extension",
+      "citations": [],
+      "immutable": false,
+      "metadata": {}
+    }
+  ],
+  "parent_version": "mint_refinement"
+}

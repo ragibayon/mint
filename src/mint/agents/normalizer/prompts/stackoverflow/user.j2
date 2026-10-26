@@ -1,0 +1,21 @@
+Normalize and consolidate the candidate software contracts inferred from this developer discussion.
+
+<developer_discussion>
+{{ discussion_json }}
+</developer_discussion>
+
+<candidate_outputs>
+{{ candidate_outputs_json }}
+</candidate_outputs>
+
+Apply this sequence:
+
+1. Enumerate only the obligations actually proposed in the source candidates.
+2. Test each proposed obligation against the question and accepted answer. Retain a narrowly scoped requirement if a particular behavior is necessary for the stated goal, but do not turn optional advice or a workaround into a mandatory contract.
+3. Merge semantic duplicates and split combined independent obligations without adding new behavior.
+4. Preserve necessary conditions, alternatives, ordering, state, parameter values, and historical scope. Express newer-version exceptions as limits on old requirements unless they establish a distinct positive obligation.
+5. Assign only directly governed callable operations to `apis`; use an empty list when no supported callable target exists.
+6. Choose `contracts_found`, `no_contract`, or `abstain` from the evidence rather than from proposer counts.
+7. Account for every candidate in `lineage`, `excluded_or_modified`, or `unresolved`, using its exact source and zero-based candidate index.
+
+Do not lose independent, evidence-supported obligations to reduce contract count. Keep contract text concise and self-contained. Put evidence explanations, removed error narratives, and modification details in the rationale or audit rather than in the contract. Follow the required output schema.

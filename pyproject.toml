@@ -1,0 +1,48 @@
+[project]
+name = "agent-contracts"
+version = "0.1.0"
+description = "Infer, normalize, and review evidence-grounded software contracts."
+readme = "README.md"
+requires-python = ">=3.12"
+
+dependencies = [
+    "beautifulsoup4>=4.15.0",
+    "black>=26.10.1",
+    "jinja2>=3.1.6",
+    "openpyxl>=3.1.5",
+    "pandas>=3.0.6",
+    "pydantic>=2.14.1",
+    "python-dotenv>=1.2.4",
+    "requests>=2.34.2",
+    "rich>=15.0.0",
+    "sentencepiece>=0.2.2",
+    "torch==2.9.1",
+    "transformers>=5.20.2",
+]
+
+[project.scripts]
+infer-contracts = "mint.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mint"]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cu128", marker = "sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+markers = [
+    "integration: requires a running external or local service",
+]

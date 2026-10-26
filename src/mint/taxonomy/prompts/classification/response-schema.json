@@ -1,0 +1,103 @@
+{
+  "type": "json_schema",
+  "json_schema": {
+    "name": "Decision",
+    "strict": true,
+    "schema": {
+      "additionalProperties": false,
+      "properties": {
+        "contract_id": {
+          "minLength": 1,
+          "title": "Contract Id",
+          "type": "string"
+        },
+        "taxonomy_version": {
+          "minLength": 1,
+          "title": "Taxonomy Version",
+          "type": "string"
+        },
+        "taxonomy_hash": {
+          "maxLength": 64,
+          "minLength": 64,
+          "title": "Taxonomy Hash",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "classified",
+            "ambiguous",
+            "unclassified"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "leaf_id": {
+          "anyOf": [
+            {
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "Required valid terminal leaf ONLY when classified; JSON null otherwise.",
+          "title": "Leaf Id"
+        },
+        "competing_leaf_ids": {
+          "description": "At least two distinct terminal leaves ONLY when ambiguous; empty list otherwise.",
+          "items": {
+            "type": "string"
+          },
+          "title": "Competing Leaf Ids",
+          "type": "array"
+        },
+        "unclassified_reason": {
+          "anyOf": [
+            {
+              "enum": [
+                "no-matching-leaf",
+                "insufficient-evidence"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "description": "MUST be JSON null for classified and ambiguous. Only unclassified may use no-matching-leaf or insufficient-evidence. Never combine either reason with an assigned leaf.",
+          "title": "Unclassified Reason"
+        },
+        "justification": {
+          "minLength": 1,
+          "title": "Justification",
+          "type": "string"
+        },
+        "evidence_quote": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Evidence Quote"
+        }
+      },
+      "required": [
+        "contract_id",
+        "taxonomy_version",
+        "taxonomy_hash",
+        "status",
+        "leaf_id",
+        "competing_leaf_ids",
+        "unclassified_reason",
+        "justification",
+        "evidence_quote"
+      ],
+      "title": "Decision",
+      "type": "object"
+    }
+  }
+}

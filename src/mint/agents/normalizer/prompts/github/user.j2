@@ -1,0 +1,21 @@
+Normalize and consolidate the candidate contracts for this GitHub artifact.
+
+<github_artifact>
+{{ artifact_json }}
+</github_artifact>
+
+<candidate_outputs>
+{{ candidate_outputs_json }}
+</candidate_outputs>
+
+Apply this sequence:
+
+1. Enumerate only obligations actually proposed by the candidates.
+2. Test each obligation against the artifact using the evidence policy.
+3. Merge duplicates and split combined independent obligations without adding behavior.
+4. Preserve conditions, alternatives, ordering, state, parameters, and historical scope.
+5. Assign only directly governed callable operations to `apis`.
+6. Select the evidence-supported decision without voting by proposer count.
+7. Account for every candidate with exact source/index references and present evidence sections.
+
+Keep normalized contracts concise and self-contained. Put evidence explanations and repairs in the rationale or audit.
